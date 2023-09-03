@@ -4,7 +4,7 @@ import './ProfileSide.css'
 function ProfileSide() {
   return (
     <div className='ProfileSide'>
-        ProfileSide
+        ProfileSides
     </div>
   )
 }

@@ -6,7 +6,7 @@ function Home() {
   return (
     <div className='Home'>
         <ProfileSide />
-        <div className='postSide'>Post</div>
+        <div className='postSide'>Posts</div>
         <div className='rightSide'>Right</div>
     </div>
   )
