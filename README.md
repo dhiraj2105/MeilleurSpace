@@ -1,3 +1,5 @@
-# My Social Media app
+# My Social Media app [Development Mode]
 
-inital commits
+<!-- Updates -->
+
+right side
