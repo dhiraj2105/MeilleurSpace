@@ -1,0 +1,6 @@
+.Home{
+    position: relative;
+    display: grid;
+    grid-template-columns: 18rem auto 20rem; /* it creates 3 columns of 18rem auto 20 rem for profile post and right divs*/
+    gap: 1rem;
+}
