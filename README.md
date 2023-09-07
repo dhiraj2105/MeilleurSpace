@@ -2,4 +2,4 @@
 
 <!-- Updates -->
 
-right side
+front end almost completed
