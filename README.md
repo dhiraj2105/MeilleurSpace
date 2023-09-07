@@ -3,3 +3,5 @@
 <!-- Updates -->
 
 front end almost completed
+
+Server and REST API development started
