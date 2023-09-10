@@ -2,13 +2,17 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import AuthRoute from "./Routes/AuthRoute.js";
 
 const app = express();
-app.use(bodyParser.json({ limit: "30", extended: true })); //limit of json
-app.use(bodyParser.urlencoded({ limit: "30", extended: true }));
+
+// middleware
+app.use(bodyParser.json({ limit: "30mb", extended: true })); //limit of json
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 dotenv.config();
 
+//mongodb config connection
 mongoose
   .connect(process.env.MONGO_DB, {
     useNewUrlParser: true,
@@ -20,3 +24,6 @@ mongoose
     )
   )
   .catch((err) => console.log(err));
+
+//usage of routes
+app.use("/auth", AuthRoute);
