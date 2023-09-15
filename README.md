@@ -4,4 +4,4 @@
 
 front end almost completed
 
-Server and REST API development started
+REST API completed
