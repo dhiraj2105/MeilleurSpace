@@ -2,6 +2,4 @@
 
 <!-- Updates -->
 
-front end almost completed
-
-REST API completed
+Post upload complete
