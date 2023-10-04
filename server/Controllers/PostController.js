@@ -109,7 +109,7 @@ export const getPostTimeline = async (req, res) => {
       currentUserPosts
         .concat(...followingPosts[0].followingPosts)
         .sort((a, b) => {
-          return b.createdAt - a.createdAt;
+          return new Date(b.createdAt) - new Date(a.createdAt);
         })
     );
   } catch (error) {
