@@ -16,6 +16,10 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 app.use(cors());
 
+//server images for public
+app.use(express.static("public"));
+app.use("/images", express.static("images"));
+
 dotenv.config();
 
 //mongodb config connection
