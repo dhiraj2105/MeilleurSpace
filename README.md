@@ -2,4 +2,4 @@
 
 <!-- Updates -->
 
-Axios error404 not found
+Axios error 404 not found
