@@ -14,14 +14,14 @@ const Post = ({ data }) => {
   const [liked, setLiked] = useState(data.likes.includes(user._id));
   const [likes, setLikes] = useState(data.likes.length);
   const handleLike = () => {
-    setLiked((prev) => !prev);
     likePost(data._id, user._id);
+    setLiked((prev) => !prev);
     liked ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1);
   };
   return (
     <div className="Post">
       <img
-        src={data.img ? process.env.REACT_APP_PUBLIC_FOLDER + data.img : ""}
+        src={data.image ? process.env.REACT_APP_PUBLIC_FOLDER + data.image : ""}
         alt=""
       />
 
