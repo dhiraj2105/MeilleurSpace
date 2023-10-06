@@ -1,7 +1,10 @@
-import { useLocalStorage } from "@mantine/hooks";
-
 const authReducer = (
-  state = { authData: null, loading: false, error: false },
+  state = {
+    authData: null,
+    loading: false,
+    error: false,
+    updateLoading: false,
+  },
   action
 ) => {
   switch (action.type) {
@@ -15,7 +18,7 @@ const authReducer = (
     case "UPDATING_START":
       return { ...state, updateLoading: true, error: false };
     case "UPDATING_SUCCESS":
-      useLocalStorage.setItem("profile", JSON.stringify({ ...action?.data }));
+      localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
       return {
         ...state,
         authData: action.data,
