@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import "./PostShare.css";
-import ProfileImage from "../../img/profileImg.jpg";
+// import ProfileImage from "../../img/profileImg.jpg";
 import { UilScenery } from "@iconscout/react-unicons";
 import { UilPlayCircle } from "@iconscout/react-unicons";
 import { UilLocationPoint } from "@iconscout/react-unicons";
@@ -59,8 +59,8 @@ function PostShare() {
     <div className="PostShare">
       <img
         src={
-          user.ProfilePicture
-            ? serverPublicFolder + user.CoverPicture
+          user.profilePicture
+            ? serverPublicFolder + user.profilePicture
             : serverPublicFolder + "defaultProfile.png"
         }
         alt="profile image"
@@ -93,19 +93,14 @@ function PostShare() {
             {loading ? "Uploading..." : "Share"}
           </button>
           <div style={{ display: "none" }}>
-            <input
-              type="file"
-              name="myImage"
-              ref={imageRef}
-              onChange={onImageChange}
-            />
+            <input type="file" ref={imageRef} onChange={onImageChange} />
           </div>
         </div>
 
         {image && (
           <div className="previewImage">
             <UilTimes onClick={() => setImage(null)} />
-            <img src={URL.createObjectURL(image)} alt="post image" />
+            <img src={URL.createObjectURL(image)} alt="post image preview" />
           </div>
         )}
       </div>
