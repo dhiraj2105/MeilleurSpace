@@ -71,7 +71,7 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
       opened={modalOpened}
       onClose={() => setModalOpened(false)}
     >
-      <form className="infoForm">
+      <form className="infoForm" onSubmit={handleSubmit}>
         <h3>Your info</h3>
 
         <div>
@@ -96,10 +96,10 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
           <input
             type="text"
             className="infoInput"
-            name="worksAt"
+            name="worksat"
             placeholder="Works at"
             onChange={handleChange}
-            value={formData.worksAt}
+            value={formData.worksat}
           />
         </div>
         <div>
