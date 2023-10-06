@@ -16,7 +16,7 @@ function Posts() {
   }, []);
 
   if (!posts) return "No Posts";
-  if (params.id) posts = posts.filter((post) => post.userid === params.id);
+  if (params.id) posts = posts.filter((post) => post.userId === params.id);
   return (
     <div className="Post">
       {loading
