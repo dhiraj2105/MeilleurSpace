@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function ProfileCard({ location }) {
   const { user } = useSelector((state) => state.authReducer.authData);
-  const post = useSelector((state) => state.postReducer.posts);
+  const posts = useSelector((state) => state.postReducer.posts);
   const serverPublicFolder = process.env.REACT_APP_PUBLIC_FOLDER;
 
   return (
@@ -13,16 +13,16 @@ function ProfileCard({ location }) {
       <div className="ProfileImages">
         <img
           src={
-            user.CoverPicture
-              ? serverPublicFolder + user.CoverPicture
+            user.coverPicture
+              ? serverPublicFolder + user.coverPicture
               : serverPublicFolder + "defaultCover.jpg"
           }
           alt="cover"
         />
         <img
           src={
-            user.ProfilePicture
-              ? serverPublicFolder + user.CoverPicture
+            user.profilePicture
+              ? serverPublicFolder + user.profilePicture
               : serverPublicFolder + "defaultProfile.png"
           }
           alt="profile"
@@ -33,7 +33,7 @@ function ProfileCard({ location }) {
         <span>
           {user.firstname} {user.lastname}
         </span>
-        <span>{user.worksAt ? user.worksAt : "Write about yourself"}</span>
+        <span>{user.worksat ? user.worksat : "Write about yourself"}</span>
       </div>
 
       <div className="followStatus">
@@ -54,7 +54,7 @@ function ProfileCard({ location }) {
               <div className="vl"></div>
               <div className="follow">
                 <span>
-                  {post.filter((post) => post.userId === user._id).length}
+                  {posts.filter((post) => post.userId === user._id).length}
                 </span>
                 <span>Posts</span>
               </div>
