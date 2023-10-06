@@ -4,7 +4,7 @@ import { UilPen } from "@iconscout/react-unicons";
 import ProfileModal from "../profileModal/ProfileModal";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import * as UserApi from "../../api/UserRequest";
+import * as UserApi from "../../api/UserRequest.js";
 import { logOut } from "../../actions/AuthAction";
 
 function InfoCard() {
@@ -16,13 +16,17 @@ function InfoCard() {
   const profileUserId = params.id;
   const [profileUser, setProfileUser] = useState({});
   const { user } = useSelector((state) => state.authReducer.authData);
+
   useEffect(() => {
     const fetchProfileUser = async () => {
       if (profileUserId === user._id) {
         setProfileUser(user);
+        console.log(user);
       } else {
+        console.log("fetching user");
         const profileUser = await UserApi.getUser(profileUserId);
         setProfileUser(profileUser);
+        // console.log(profileUser);
       }
     };
     fetchProfileUser();
@@ -35,7 +39,7 @@ function InfoCard() {
   return (
     <div className="InfoCard">
       <div className="infoHead">
-        <h4>You Info</h4>
+        <h4>Profile Info</h4>
         {user._id === profileUserId ? (
           <div>
             <UilPen
@@ -65,14 +69,14 @@ function InfoCard() {
         <span>
           <b>Lives in </b>
         </span>
-        <span>{profileUser.livenIn}</span>
+        <span>{profileUser.livesin}</span>
       </div>
 
       <div className="info">
         <span>
           <b>Works at </b>
         </span>
-        <span>{profileUser.worksAt}</span>
+        <span>{profileUser.worksat}</span>
       </div>
 
       <button className="button logout-button" onClick={handleLogout}>
