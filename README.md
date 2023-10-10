@@ -2,6 +2,5 @@
 
 <!-- Updates -->
 
-Error: Post Timeline
-
-update: 2:45:45
+Social Media Platform completed
+Chat section remains
