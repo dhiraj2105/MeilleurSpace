@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./FollowersCard.css";
 
-import { Followers } from "../../Data/followersData";
+// import { Followers } from "../../Data/followersData";
 import User from "../User/User";
 import { useSelector } from "react-redux";
 import { getAllUser } from "../../api/UserRequest";
@@ -14,7 +14,7 @@ function FollowersCard() {
     const fetchPersons = async () => {
       const { data } = await getAllUser();
       setPersons(data);
-      console.log(data);
+      // console.log(data);
     };
     fetchPersons();
   }, []);
@@ -23,7 +23,9 @@ function FollowersCard() {
     <div className="FollowersCard">
       <h3>Peoples you may know</h3>
 
-      {Followers.map((person, id) => {
+      {persons.map((person, id) => {
+        if (persons._id !== user._id) {
+        }
         return <User person={person} key={id} />;
       })}
     </div>
