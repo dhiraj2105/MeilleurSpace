@@ -2,5 +2,4 @@
 
 <!-- Updates -->
 
-Social Media Platform completed
-Chat section remains
+Chat REST Api done
