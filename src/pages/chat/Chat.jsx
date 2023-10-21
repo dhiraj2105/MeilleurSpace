@@ -10,10 +10,13 @@ import Home from "../../img/home.png";
 import Noti from "../../img/noti.png";
 import Comment from "../../img/comment.png";
 import { UilSetting } from "@iconscout/react-unicons";
+import ChatBox from "../../components/chatBox/ChatBox";
 
 function Chat() {
   const { user } = useSelector((state) => state.authReducer.authData);
   const [chats, setChats] = useState([]);
+  const [currentChat, setCurrentChat] = useState(null);
+
   useEffect(() => {
     const getChats = async () => {
       try {
@@ -36,7 +39,7 @@ function Chat() {
           <h2>Chats</h2>
           <div className="Chat-list">
             {chats.map((chat) => (
-              <div>
+              <div onClick={() => setCurrentChat(chat)}>
                 <Conversation data={chat} currentUserId={user._id} />
               </div>
             ))}
@@ -54,8 +57,10 @@ function Chat() {
           <Link to="../chat">
             <img src={Comment} alt="" />
           </Link>
-          {/* chat body */}
         </div>
+        {/* chat body */}
+        <ChatBox chat={currentChat} currentUser={user._id} />
+        {/* 59:00 */}
       </div>
     </div>
   );
