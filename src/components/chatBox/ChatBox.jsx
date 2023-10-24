@@ -1,14 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./ChatBox.css";
 import { getUser } from "../../api/UserRequest";
-import { getMessages } from "../../api/MessageRequest";
+import { addMessage, getMessages } from "../../api/MessageRequest";
 import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
 
-function ChatBox({ chat, currentUser }) {
+function ChatBox({ chat, currentUser, setSendMessage, receivedMessage }) {
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const scroll = useRef();
+
+  useEffect(() => {
+    if (receivedMessage !== null && receivedMessage.chatId === chat._id) {
+      // console.log("Data receive in child chatbox : ", receivedMessage);
+      setMessages([...messages, receivedMessage]);
+    }
+  }, [receivedMessage]);
 
   useEffect(() => {
     const userId = chat?.members?.find((id) => id !== currentUser);
@@ -29,7 +37,7 @@ function ChatBox({ chat, currentUser }) {
     const fetchMessages = async () => {
       try {
         const { data } = await getMessages(chat._id);
-        console.log(data);
+        // console.log(data);
         setMessages(data);
       } catch (error) {
         console.log(error);
@@ -41,6 +49,33 @@ function ChatBox({ chat, currentUser }) {
   const handleChange = (newMessage) => {
     setNewMessage(newMessage);
   };
+
+  const handleSend = async (e) => {
+    e.preventDefault();
+    const messaage = {
+      senderId: currentUser,
+      text: newMessage,
+      chatId: chat._id,
+    };
+
+    //send message to db
+    try {
+      const { data } = await addMessage(messaage);
+      setMessages([...messages, data]);
+      setNewMessage("");
+    } catch (error) {
+      console.log(error);
+    }
+
+    //send message to socket server
+    const receiveId = chat.members.find((id) => id !== currentUser);
+    setSendMessage({ ...messaage, receiveId });
+  };
+
+  // scroll to last msg
+  useEffect(() => {
+    scroll.current?.scrollIntoView({ behaviour: "smooth" });
+  }, [messages]);
 
   return (
     <>
@@ -77,6 +112,7 @@ function ChatBox({ chat, currentUser }) {
               {messages.map((message) => (
                 <>
                   <div
+                    ref={scroll}
                     className={
                       message.senderId === currentUser
                         ? "message own"
@@ -93,7 +129,9 @@ function ChatBox({ chat, currentUser }) {
             <div className="chat-sender">
               <div>+</div>
               <InputEmoji value={newMessage} onChange={handleChange} />
-              <div className="send-button button">Send</div>
+              <div className="send-button button" onClick={handleSend}>
+                Send
+              </div>
             </div>
           </>
         ) : (
